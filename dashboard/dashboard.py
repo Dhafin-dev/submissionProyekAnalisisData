@@ -1,3 +1,4 @@
+import os
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -10,7 +11,11 @@ st.set_page_config(page_title="E-Commerce Public Dataset Dashboard", layout="wid
 # Fungsi memuat data dengan cache agar cepat
 @st.cache_data
 def load_data():
-    df = pd.read_csv("main_data.csv")
+    # Mengambil lokasi folder tempat dashboard.py berada, lalu menggabungkannya dengan main_data.csv
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    file_path = os.path.join(current_dir, "main_data.csv")
+    df = pd.read_csv(file_path)
+
     datetime_cols = [
         "order_purchase_timestamp",
         "order_delivered_customer_date",
